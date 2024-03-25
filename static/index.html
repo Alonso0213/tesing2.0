@@ -1,11 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <h1>Test Page</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>Test</h1>
+    <form id="registerForm">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required /><br /><br />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required /><br /><br />
+
+      <label for="percentage">Percentage:</label>
+      <input type="text" id="percentage" name="percentage" required /><span
+        id="percentageSymbol"
+        >%</span
+      ><br /><br />
+
+      <button type="submit">Register</button>
+    </form>
+
+    <button id="downloadButton">Download Data</button>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const firstName = document.getElementById("firstName").value;
+          const lastName = document.getElementById("lastName").value;
+          const percentage = document.getElementById("percentage").value;
+
+          try {
+            const response = await fetch("/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ firstName, lastName, percentage }),
+            });
+
+            if (response.ok) {
+              alert("User registered successfully!");
+            } else {
+              console.error("Failed to register user:", response.statusText);
+              alert("Failed to register user. Please try again.");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("Error registering user. Please try again.");
+          }
+        });
+      async function handleDownloadClick() {
+        try {
+          const response = await fetch("/download-excel");
+
+          if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "MongoDB.xlsx");
+            link.click();
+          } else {
+            console.error("Error:", response.statusText);
+            alert("Failed to download data. Please try again.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Error downloading data. Please try again.");
+        }
+      }
+
+      document
+        .getElementById("downloadButton")
+        .addEventListener("click", handleDownloadClick);
+    </script>
+  </body>
 </html>
