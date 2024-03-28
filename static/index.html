@@ -15,11 +15,89 @@
       <label for="lastName">Last Name:</label>
       <input type="text" id="lastName" name="lastName" required /><br /><br />
 
-      <label for="percentage">Percentage:</label>
-      <input type="text" id="percentage" name="percentage" required /><span
-        id="percentageSymbol"
-        >%</span
-      ><br /><br />
+      <label for="personalityType1">Personality Type 1:</label>
+      <select type="text" id="personalityType1" name="personalityType1" required>
+          <option value="ENFP">ENFP</option>
+          <option value="ENTJ">ENTJ</option>
+          <option value="ENTP">ENTP</option>
+          <option value="ESFJ">ESFJ</option>
+          <option value="ESTJ">ESTJ</option>
+          <option value="INFP">INFP</option>
+          <option value="INTJ">INTJ</option>
+          <option value="INTP">INTP</option>
+          <option value="ISFJ">ISFJ</option>
+          <option value="ISFP">ISFP</option>
+          <option value="ISTJ">ISTJ</option>
+          <option value="ISTP">ISTP</option>
+      </select><br /><br />
+
+      <label for="personalityType2">Personality Type 2:</label>
+      <select type="text" id="personalityType2" name="personalityType2" required>
+          <option value="ENFP">ENFP</option>
+          <option value="ENTJ">ENTJ</option>
+          <option value="ENTP">ENTP</option>
+          <option value="ESFJ">ESFJ</option>
+          <option value="ESTJ">ESTJ</option>
+          <option value="INFP">INFP</option>
+          <option value="INTJ">INTJ</option>
+          <option value="INTP">INTP</option>
+          <option value="ISFJ">ISFJ</option>
+          <option value="ISFP">ISFP</option>
+          <option value="ISTJ">ISTJ</option>
+          <option value="ISTP">ISTP</option>
+      </select><br /><br />
+
+      <label for="personalityType3">Personality Type 3:</label>
+      <select type="text" id="personalityType3" name="personalityType3" required>
+          <option value="ENFP">ENFP</option>
+          <option value="ENTJ">ENTJ</option>
+          <option value="ENTP">ENTP</option>
+          <option value="ESFJ">ESFJ</option>
+          <option value="ESTJ">ESTJ</option>
+          <option value="INFP">INFP</option>
+          <option value="INTJ">INTJ</option>
+          <option value="INTP">INTP</option>
+          <option value="ISFJ">ISFJ</option>
+          <option value="ISFP">ISFP</option>
+          <option value="ISTJ">ISTJ</option>
+          <option value="ISTP">ISTP</option>
+      </select><br /><br />
+
+      <label for="personalityType4">Personality Type 4:</label>
+      <select type="text" id="personalityType4" name="personalityType4" required>
+          <option value="ENFP">ENFP</option>
+          <option value="ENTJ">ENTJ</option>
+          <option value="ENTP">ENTP</option>
+          <option value="ESFJ">ESFJ</option>
+          <option value="ESTJ">ESTJ</option>
+          <option value="INFP">INFP</option>
+          <option value="INTJ">INTJ</option>
+          <option value="INTP">INTP</option>
+          <option value="ISFJ">ISFJ</option>
+          <option value="ISFP">ISFP</option>
+          <option value="ISTJ">ISTJ</option>
+          <option value="ISTP">ISTP</option>
+      </select><br /><br />
+
+      <label for="enneagram">enneagram:</label>
+      <input type="number" id="enneagram" name="enneagram" min="1" max="9" required /><br /><br />
+
+      <label for="mainUserPersona">Main User Persona:</label>
+      <select type="text" id="mainUserPersona" name="mainUserPersona">
+        <option value="Conscientiousness">Conscientiousness</option>
+        <option value="Dominance">Dominance</option>
+        <option value="Influence">Influence</option>
+        <option value="Steadiness">Steadiness</option>
+    </select><br /><br />
+
+      <label for="secondaryUserPersona">Secondary User Persona:</label>
+      <select type="text" id="secondaryUserPersona" name="secondaryUserPersona">
+        <option value="Agreeableness">Agreeableness</option>
+        <option value="Conscientiousness">Conscientiousness</option>
+        <option value="Extraversion">Extraversion</option>
+        <option value="Neuroticism">Neuroticism</option>
+        <option value="Openness">Openness</option>
+    </select><br /><br />
 
       <button type="submit">Register</button>
     </form>
@@ -34,7 +112,13 @@
 
           const firstName = document.getElementById("firstName").value;
           const lastName = document.getElementById("lastName").value;
-          const percentage = document.getElementById("percentage").value;
+          const personalityType1 = document.getElementById("personalityType1").value;
+          const personalityType2 = document.getElementById("personalityType2").value;
+          const personalityType3 = document.getElementById("personalityType3").value;
+          const personalityType4 = document.getElementById("personalityType4").value;
+          const enneagram = document.getElementById("enneagram").value;
+          const mainUserPersona = document.getElementById("mainUserPersona").value;
+          const secondaryUserPersona = document.getElementById("secondaryUserPersona").value;
 
           try {
             const response = await fetch("/register", {
@@ -42,7 +126,7 @@
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ firstName, lastName, percentage }),
+              body: JSON.stringify({ firstName, lastName, personalityType1, personalityType2, personalityType3, personalityType4, enneagram, mainUserPersona, secondaryUserPersona }),
             });
 
             if (response.ok) {

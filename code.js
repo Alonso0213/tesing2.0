@@ -13,12 +13,18 @@ app.use(express.json());
 
 app.post("/register", async (req, res) => {
   try {
-    const { firstName, lastName, percentage } = req.body;
+    const { firstName, lastName, personalityType1, personalityType2, personalityType3, personalityType4, enneagram, mainUserPersona, secondaryUserPersona} = req.body;
 
     const newUser = new User({
       firstName: firstName,
       lastName: lastName,
-      percentage: percentage
+      personalityType1: personalityType1,
+      personalityType2: personalityType2,
+      personalityType3: personalityType3,
+      personalityType4: personalityType4,
+      enneagram: enneagram,
+      mainUserPersona: mainUserPersona,
+      secondaryUserPersona: secondaryUserPersona
     });
 
     await newUser.save();
@@ -37,10 +43,10 @@ app.get("/download-excel", async (req, res) => {
     const workbook = new excel.Workbook();
     const worksheet = workbook.addWorksheet("Users");
 
-    worksheet.addRow(["First Name", "Last Name", "Percentage"]);
+    worksheet.addRow(["First Name", "Last Name", "Personality Type 1", "Personality Type 2", "Personality Type 3", "Personality Type 4", "Enneagram", "Main User Persona", "Secondary User Persona"]);
 
     users.forEach((user) => {
-      worksheet.addRow([user.firstName, user.lastName, user.percentage]);
+      worksheet.addRow([user.firstName, user.lastName, user.personalityType1, user.personalityType2, user.personalityType3, user.personalityType4, user.enneagram, user.mainUserPersona, user.secondaryUserPersona]);
     });
 
     const buffer = await workbook.xlsx.writeBuffer();
